@@ -108,9 +108,10 @@ export default function LessonOne({
   }, [quizAnswers])
 
   const lessonProgress = Math.round(
-    ((viewed.length / stages.length) * 0.45 +
+    ((viewed.length / stages.length) * 0.15 +
       (lab.filter(Boolean).length / lab.length) * 0.35 +
-      (answer.trim().length >= 80 ? 0.2 : 0)) *
+      (Object.keys(quizAnswers).length === quiz.length ? 0.2 : 0) +
+      (answer.trim().length >= 80 ? 0.3 : 0)) *
       100,
   )
 
@@ -147,14 +148,21 @@ export default function LessonOne({
           <span className="section-label">AULA GUIADA · 6 HORAS</span>
           <h2>Inteligência Artificial: fundamentos e evolução</h2>
           <p>
-            A aula está dividida em dez etapas. Você pode navegar livremente, mas o
-            progresso interno registra as etapas visitadas, o laboratório e o desafio.
+            A aula está dividida em dez etapas. Navegar pelos blocos conta apenas uma
+            pequena parte do progresso; laboratório, checkpoint e desafio têm peso maior.
           </p>
         </div>
         <div className="lesson-internal-progress">
           <strong>{lessonProgress}%</strong>
-          <span>progresso da aula</span>
+          <span>progresso acadêmico</span>
         </div>
+      </div>
+
+      <div className="progress-criteria">
+        <span>Etapas visitadas: 15%</span>
+        <span>Laboratório: 35%</span>
+        <span>Checkpoint: 20%</span>
+        <span>Desafio: 30%</span>
       </div>
 
       <div className="lesson-stage-progress">
