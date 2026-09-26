@@ -33,7 +33,7 @@ const projectMilestones: Record<number, string> = {
   12: 'Consolidar, documentar, demonstrar e defender o produto final.',
 }
 
-type Screen = 'home' | 'register' | 'course'
+type Screen = 'home' | 'login' | 'register' | 'course'
 
 function App() {
   const [student, setStudent] = useState<Student | null>(() =>
@@ -50,6 +50,7 @@ function App() {
     loadJSON<Record<string, string>>(STORAGE.answers, {}),
   )
   const [savedMessage, setSavedMessage] = useState('')
+  const [loginError, setLoginError] = useState('')
 
   const allLessons = useMemo(
     () => course.disciplines.flatMap((discipline) => discipline.lessons),
@@ -89,11 +90,33 @@ function App() {
 
   function enterCourse() {
     if (!student) {
-      setScreen('register')
+      setScreen('login')
       return
     }
 
     localStorage.setItem(STORAGE.session, 'course')
+    setScreen('course')
+    setLoginError('')
+    window.scrollTo({ top: 0 })
+  }
+
+  function login(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    const email = String(data.get('email') ?? '').trim().toLowerCase()
+
+    if (!student) {
+      setLoginError('Nenhum cadastro piloto foi encontrado neste dispositivo.')
+      return
+    }
+
+    if (student.email.trim().toLowerCase() !== email) {
+      setLoginError('E-mail não corresponde ao cadastro piloto deste dispositivo.')
+      return
+    }
+
+    localStorage.setItem(STORAGE.session, 'course')
+    setLoginError('')
     setScreen('course')
     window.scrollTo({ top: 0 })
   }
@@ -144,13 +167,61 @@ function App() {
   if (screen === 'home') {
     return (
       <HomePage
-        student={student}
-        progress={progress}
-        completedLessons={completed.length}
-        onContinue={enterCourse}
+        onLogin={() => setScreen('login')}
         onRegister={() => setScreen('register')}
-        onReset={resetPilot}
       />
+    )
+  }
+
+  if (screen === 'login') {
+    return (
+      <main className="auth-page">
+        <section className="auth-shell">
+          <button className="back-home-btn" type="button" onClick={goHome}>
+            ← Página principal
+          </button>
+
+          <div className="brand-lockup">
+            <div className="brand-mark">A</div>
+            <div>
+              <strong>AUTHERA</strong>
+              <span>TREINAMENTOS</span>
+            </div>
+          </div>
+
+          <div className="pilot-badge">ÁREA DO ALUNO</div>
+          <h1>Entre para continuar seu curso.</h1>
+          <p className="auth-lead">
+            Na versão piloto, o acesso é validado pelo e-mail cadastrado neste dispositivo.
+            Na próxima fase, esta tela será substituída por autenticação real com Supabase.
+          </p>
+
+          <form className="auth-form" onSubmit={login}>
+            <label>
+              E-mail
+              <input
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="voce@email.com"
+                required
+              />
+            </label>
+
+            {loginError && <div className="login-error">{loginError}</div>}
+
+            <button className="primary-btn" type="submit">
+              Entrar na área do aluno
+            </button>
+          </form>
+
+          {!student && (
+            <button className="auth-register-link" onClick={() => setScreen('register')}>
+              Ainda não tenho acesso piloto
+            </button>
+          )}
+        </section>
+      </main>
     )
   }
 
@@ -427,22 +498,11 @@ function App() {
 }
 
 type HomePageProps = {
-  student: Student | null
-  progress: number
-  completedLessons: number
-  onContinue: () => void
+  onLogin: () => void
   onRegister: () => void
-  onReset: () => void
 }
 
-function HomePage({
-  student,
-  progress,
-  completedLessons,
-  onContinue,
-  onRegister,
-  onReset,
-}: HomePageProps) {
+function HomePage({ onLogin, onRegister }: HomePageProps) {
   return (
     <main className="home-page">
       <header className="home-header">
@@ -454,38 +514,40 @@ function HomePage({
           </div>
         </div>
 
-        <span className="pilot-status">PLATAFORMA PILOTO</span>
+        <div className="public-nav">
+          <a href="#curso">Curso</a>
+          <a href="#metodologia">Metodologia</a>
+          <button className="header-login-btn" onClick={onLogin}>Entrar</button>
+        </div>
       </header>
 
       <section className="home-hero">
         <div className="home-copy">
-          <span className="eyebrow">FORMAÇÃO PROFISSIONAL EM INTELIGÊNCIA ARTIFICIAL</span>
-          <h1>Aprenda IA construindo sistemas inteligentes de verdade.</h1>
+          <span className="eyebrow">AUTHERA TREINAMENTOS</span>
+          <h1>Formação prática para quem quer compreender e construir Inteligência Artificial.</h1>
           <p>
-            Uma formação que percorre fundamentos, Machine Learning, Deep Learning,
-            LLMs, RAG, agentes, infraestrutura, MLOps, segurança e um Projeto
-            Integrador desenvolvido durante todo o curso.
+            Cursos online desenvolvidos para unir fundamentos, prática, projetos reais
+            e engenharia de sistemas inteligentes.
           </p>
 
           <div className="home-actions">
-            {student ? (
-              <button className="primary-btn" onClick={onContinue}>
-                Continuar curso
-              </button>
-            ) : (
-              <button className="primary-btn" onClick={onRegister}>
-                Começar turma piloto
-              </button>
-            )}
-            <a className="secondary-link" href="#curso">
-              Conhecer o curso
-            </a>
+            <button className="primary-btn" onClick={onRegister}>
+              Conhecer a turma piloto
+            </button>
+            <button className="secondary-btn" onClick={onLogin}>
+              Entrar na área do aluno
+            </button>
           </div>
         </div>
 
         <div className="home-course-card" id="curso">
           <span>CURSO 01</span>
           <h2>{course.title}</h2>
+          <p>
+            Da matemática e Machine Learning até LLMs, RAG, agentes, MLOps,
+            infraestrutura e segurança de IA.
+          </p>
+
           <div className="home-stats">
             <div><b>360h</b><span>Carga horária</span></div>
             <div><b>12</b><span>Disciplinas</span></div>
@@ -494,27 +556,7 @@ function HomePage({
         </div>
       </section>
 
-      {student && (
-        <section className="returning-card">
-          <div className="returning-avatar">{student.name.charAt(0).toUpperCase()}</div>
-          <div className="returning-copy">
-            <span>Bem-vindo de volta</span>
-            <h2>{student.name}</h2>
-            <p>{completedLessons} de 60 aulas concluídas</p>
-          </div>
-          <div className="returning-progress">
-            <strong>{progress}%</strong>
-            <div className="progress-track">
-              <div className="progress-fill" style={{ width: `${progress}%` }} />
-            </div>
-          </div>
-          <button className="primary-btn" onClick={onContinue}>
-            Continuar de onde parei
-          </button>
-        </section>
-      )}
-
-      <section className="home-pillars">
+      <section className="home-pillars" id="metodologia">
         <article>
           <span>01</span>
           <h3>Fundamentos sólidos</h3>
@@ -532,14 +574,17 @@ function HomePage({
         </article>
       </section>
 
-      {student && (
-        <div className="pilot-maintenance">
-          <button onClick={onReset}>Apagar dados locais da turma piloto</button>
+      <section className="public-cta">
+        <div>
+          <span className="section-label">ÁREA DO ALUNO</span>
+          <h2>Já está matriculado?</h2>
+          <p>Entre para acessar aulas, progresso, atividades e Projeto Integrador.</p>
         </div>
-      )}
+        <button className="primary-btn" onClick={onLogin}>Entrar</button>
+      </section>
 
       <footer className="home-footer">
-        AUTHERA Treinamentos · Turma piloto
+        AUTHERA Treinamentos · Educação aplicada à Inteligência Artificial
       </footer>
     </main>
   )
