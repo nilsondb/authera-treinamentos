@@ -772,29 +772,29 @@ function LabSlide({ values, onToggle }: LabSlideProps) {
   const steps = [
     {
       title: 'Inventariar o hardware',
-      description: 'Identifique CPU, RAM, armazenamento e GPU da máquina.',
+      description: 'Identifique CPU, RAM, armazenamento e GPU da máquina. Anote modelo do processador, memória disponível, disco principal, GPU e VRAM.',
       command: 'lscpu | head -20\nfree -h\nlsblk\nnvidia-smi',
     },
     {
       title: 'Verificar o ambiente de IA',
-      description: 'Confirme se existe um servidor local de modelos e quais modelos estão instalados.',
+      description: 'Confirme a versão do Ollama e liste os modelos locais. Compare tamanho em disco e família dos modelos disponíveis.',
       command: 'ollama --version\nollama list',
     },
     {
       title: 'Executar uma inferência',
-      description: 'Escolha um modelo instalado e peça uma explicação curta sobre GPU.',
+      description: 'Escolha um modelo instalado e execute uma pergunta curta. Observe tempo até a primeira resposta e fluidez da geração.',
       command: 'ollama run qwen3:4b "Explique em uma frase o que uma GPU faz em IA."',
     },
     {
       title: 'Observar recursos',
-      description: 'Enquanto o modelo responde, observe o consumo da GPU em outro terminal.',
+      description: 'Enquanto o modelo responde, observe uso da GPU, VRAM e processo ativo. Relacione o que aparece na tela com os conceitos da etapa anterior.',
       command: 'watch -n 1 nvidia-smi',
     },
   ]
 
   return (
     <div className="lesson-slide">
-      <span className="slide-kicker">LABORATÓRIO · 2H20</span>
+      <span className="slide-kicker">LABORATÓRIO · 3 HORAS</span>
       <h2>Do conceito para uma IA executando de verdade.</h2>
       <p className="slide-lead">
         Este laboratório foi desenhado para Linux com Ollama e GPU NVIDIA. Em uma
@@ -805,6 +805,24 @@ function LabSlide({ values, onToggle }: LabSlideProps) {
       <div className="lab-warning">
         <strong>Importante</strong>
         <p>Os comandos abaixo são apenas de consulta ou execução de modelo. Nenhum deles altera a configuração do sistema.</p>
+      </div>
+
+      <div className="lab-objectives">
+        <article>
+          <span>OBJETIVO A</span>
+          <b>Ligar conceito ao hardware</b>
+          <p>Você deve sair do laboratório sabendo onde CPU, RAM, GPU e VRAM aparecem no sistema real.</p>
+        </article>
+        <article>
+          <span>OBJETIVO B</span>
+          <b>Distinguir modelo de servidor</b>
+          <p>Ollama é o software que serve modelos; Qwen, Llama e outros são modelos executados por ele.</p>
+        </article>
+        <article>
+          <span>OBJETIVO C</span>
+          <b>Observar inferência</b>
+          <p>A resposta gerada é uma inferência. O modelo não está sendo treinado novamente a cada pergunta.</p>
+        </article>
       </div>
 
       <div className="lab-steps">
@@ -823,6 +841,17 @@ function LabSlide({ values, onToggle }: LabSlideProps) {
             </div>
           </article>
         ))}
+      </div>
+
+      <div className="lab-observation">
+        <span className="section-label">O QUE VOCÊ DEVE OBSERVAR</span>
+        <ul>
+          <li>Quanto de VRAM o modelo ocupa quando está carregado.</li>
+          <li>Se a utilização da GPU aumenta durante a geração.</li>
+          <li>A diferença entre o tamanho do modelo em disco e o consumo de memória em execução.</li>
+          <li>O fato de a pergunta mudar sem que o modelo seja treinado novamente.</li>
+          <li>Como hardware e tamanho do modelo influenciam a velocidade percebida.</li>
+        </ul>
       </div>
 
       <div className="lab-result">
