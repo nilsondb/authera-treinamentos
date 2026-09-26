@@ -1,6 +1,7 @@
 import { FormEvent, useMemo, useState } from 'react'
 import { course } from './data/course'
 import type { Student } from './types'
+import LessonOne from './lessons/LessonOne'
 
 const STORAGE = {
   student: 'authera.student.v1',
@@ -650,91 +651,5 @@ function HomePage({ onLogin, onRegister }: HomePageProps) {
   )
 }
 
-type LessonOneProps = {
-  answer: string
-  onAnswer: (value: string) => void
-  onSaveAnswer: () => void
-  savedMessage: string
-}
-
-function LessonOne({ answer, onAnswer, onSaveAnswer, savedMessage }: LessonOneProps) {
-  return (
-    <>
-      <section className="content-card">
-        <div className="section-label">OBJETIVOS DE APRENDIZAGEM</div>
-        <h2>Ao final desta aula você deverá ser capaz de:</h2>
-
-        <div className="objectives-grid">
-          <div>
-            <b>01</b>
-            <p>Explicar o que chamamos de Inteligência Artificial.</p>
-          </div>
-          <div>
-            <b>02</b>
-            <p>Diferenciar IA, Machine Learning, Deep Learning e IA Generativa.</p>
-          </div>
-          <div>
-            <b>03</b>
-            <p>Compreender treinamento, inferência, modelos, parâmetros e tokens.</p>
-          </div>
-          <div>
-            <b>04</b>
-            <p>Relacionar CPU, GPU, memória e armazenamento ao processamento de IA.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="content-card">
-        <div className="section-label">1.1 · CONCEITO FUNDAMENTAL</div>
-        <h2>O que é Inteligência Artificial?</h2>
-        <p>
-          Inteligência Artificial é uma área da computação que desenvolve sistemas
-          capazes de executar tarefas associadas a percepção, previsão, decisão,
-          linguagem, criação e resolução de problemas.
-        </p>
-        <blockquote>
-          O ponto central do curso não será apenas utilizar IA, mas compreender como
-          ela aprende, como é construída e como se transforma em um sistema confiável.
-        </blockquote>
-      </section>
-
-      <section className="content-card">
-        <div className="section-label">1.2 · MAPA DA ÁREA</div>
-        <h2>IA → ML → Deep Learning → IA Generativa</h2>
-        <div className="concept-flow">
-          <div><b>IA</b><span>Campo mais amplo</span></div>
-          <i>→</i>
-          <div><b>Machine Learning</b><span>Aprende padrões nos dados</span></div>
-          <i>→</i>
-          <div><b>Deep Learning</b><span>Redes neurais profundas</span></div>
-          <i>→</i>
-          <div><b>IA Generativa</b><span>Gera novo conteúdo</span></div>
-        </div>
-      </section>
-
-      <section className="content-card">
-        <div className="section-label">DESAFIO DA AULA</div>
-        <h2>Explique com suas próprias palavras</h2>
-        <p>
-          Qual é a diferença entre Inteligência Artificial, Machine Learning e Deep
-          Learning? Não procure uma definição pronta: queremos registrar sua compreensão
-          inicial e comparar novamente no fim da disciplina.
-        </p>
-        <textarea
-          className="answer-box"
-          value={answer}
-          onChange={(event) => onAnswer(event.target.value)}
-          placeholder="Escreva sua resposta..."
-        />
-        <div className="save-row">
-          <span>{savedMessage}</span>
-          <button className="secondary-btn" onClick={onSaveAnswer}>
-            Salvar resposta
-          </button>
-        </div>
-      </section>
-    </>
-  )
-}
 
 export default App
