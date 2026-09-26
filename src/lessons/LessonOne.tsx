@@ -24,15 +24,15 @@ function loadJSON<T>(key: string, fallback: T): T {
 
 const stages = [
   { id: 0, label: 'Abertura', time: '15 min' },
-  { id: 1, label: 'Evolução da IA', time: '30 min' },
-  { id: 2, label: 'Mapa da IA', time: '30 min' },
-  { id: 3, label: 'Como a máquina aprende', time: '35 min' },
-  { id: 4, label: 'Modelo, dados e parâmetros', time: '35 min' },
-  { id: 5, label: 'Treinamento × inferência', time: '30 min' },
-  { id: 6, label: 'Hardware para IA', time: '35 min' },
-  { id: 7, label: 'Laboratório prático', time: '2h 20 min' },
-  { id: 8, label: 'Checkpoint', time: '30 min' },
-  { id: 9, label: 'Desafio e síntese', time: '50 min' },
+  { id: 1, label: 'Evolução da IA', time: '20 min' },
+  { id: 2, label: 'Mapa da IA', time: '20 min' },
+  { id: 3, label: 'Como a máquina aprende', time: '20 min' },
+  { id: 4, label: 'Modelo, dados e parâmetros', time: '15 min' },
+  { id: 5, label: 'Treinamento × inferência', time: '15 min' },
+  { id: 6, label: 'Hardware para IA', time: '15 min' },
+  { id: 7, label: 'Laboratório prático', time: '3h' },
+  { id: 8, label: 'Checkpoint', time: '20 min' },
+  { id: 9, label: 'Desafio e síntese', time: '40 min' },
 ]
 
 const quiz = [
@@ -241,12 +241,12 @@ export default function LessonOne({
 function OpeningSlide() {
   return (
     <div className="lesson-slide">
-      <span className="slide-kicker">ABERTURA</span>
+      <span className="slide-kicker">ABERTURA · 15 MIN</span>
       <h2>Antes de falar de modelos, vamos entender o território.</h2>
       <p className="slide-lead">
         Inteligência Artificial não começou com ChatGPT. Ela é resultado de décadas de
-        matemática, computação, pesquisa sobre representação do conhecimento e aumento
-        da capacidade de processamento.
+        matemática, computação, estatística, pesquisa sobre representação do conhecimento
+        e aumento da capacidade de processamento.
       </p>
 
       <div className="objectives-grid">
@@ -256,12 +256,59 @@ function OpeningSlide() {
         <div><b>04</b><p>Relacionar CPU, GPU, RAM e armazenamento ao processamento de IA.</p></div>
       </div>
 
+      <div className="theory-stack">
+        <article>
+          <span>IDEIA 1</span>
+          <h3>IA é uma área da computação, não uma tecnologia única.</h3>
+          <p>
+            Um sistema de IA pode usar regras, estatística, algoritmos de busca, Machine Learning,
+            redes neurais ou uma combinação dessas abordagens. Por isso, dizer “esta aplicação usa IA”
+            ainda não explica como ela funciona.
+          </p>
+        </article>
+        <article>
+          <span>IDEIA 2</span>
+          <h3>Automação e IA não são exatamente a mesma coisa.</h3>
+          <p>
+            Uma automação tradicional executa regras previamente definidas. Um sistema de Machine Learning
+            pode aprender padrões a partir de exemplos e generalizar para situações não vistas durante
+            o treinamento. Sistemas modernos normalmente combinam os dois.
+          </p>
+        </article>
+        <article>
+          <span>IDEIA 3</span>
+          <h3>O curso vai sempre separar conceito de ferramenta.</h3>
+          <p>
+            Ollama, PyTorch, Docker, LangGraph e bancos vetoriais são ferramentas. Modelo, inferência,
+            embedding, classificação, contexto e generalização são conceitos. Ferramentas mudam;
+            conceitos permanecem úteis por muito mais tempo.
+          </p>
+        </article>
+      </div>
+
+      <div className="worked-example">
+        <span className="section-label">EXEMPLO RÁPIDO</span>
+        <h3>Detector de spam</h3>
+        <p>
+          Se escrevermos manualmente “se o e-mail contém ‘ganhe dinheiro’, marque como spam”, criamos
+          uma regra. Se entregarmos milhares de e-mails classificados a um algoritmo e ele aprender
+          padrões que distinguem spam de mensagens legítimas, entramos em Machine Learning.
+        </p>
+      </div>
+
+      <details className="study-check">
+        <summary>Verifique sua compreensão</summary>
+        <p>
+          Pense em dois sistemas do seu cotidiano: um que apenas automatiza uma regra e outro que parece
+          adaptar sua resposta com base em dados. Tente explicar por que você os classificaria dessa forma.
+        </p>
+      </details>
+
       <div className="teaching-note">
         <strong>Como estudar esta aula</strong>
         <p>
-          Não tente decorar definições. Ao final, você deverá conseguir explicar cada
-          conceito com exemplos próprios e observar esses conceitos funcionando em um
-          modelo executado de verdade.
+          Não tente decorar definições. Ao final, você deverá conseguir explicar cada conceito com exemplos
+          próprios e observar esses conceitos funcionando em um modelo executado de verdade.
         </p>
       </div>
     </div>
@@ -271,39 +318,78 @@ function OpeningSlide() {
 function HistorySlide() {
   return (
     <div className="lesson-slide">
-      <span className="slide-kicker">1.1 · EVOLUÇÃO</span>
+      <span className="slide-kicker">1.1 · EVOLUÇÃO · 20 MIN</span>
       <h2>Da regra escrita pelo programador ao modelo que aprende padrões.</h2>
       <p className="slide-lead">
-        A evolução da IA pode ser entendida como uma mudança progressiva na maneira de
-        representar conhecimento e resolver problemas.
+        A história da IA não é uma linha reta. Houve períodos de enorme entusiasmo,
+        limitações técnicas, redução de investimento e retomadas impulsionadas por novos
+        algoritmos, mais dados e hardware mais poderoso.
       </p>
 
       <div className="timeline">
         <div>
           <b>1950–1980</b>
           <strong>IA simbólica</strong>
-          <p>Regras, lógica, busca e sistemas especialistas. O conhecimento era explicitamente programado.</p>
+          <p>Regras, lógica, busca e sistemas especialistas. O conhecimento era explicitamente representado.</p>
         </div>
         <div>
           <b>1980–2010</b>
           <strong>Aprendizado estatístico</strong>
-          <p>Modelos passam a extrair padrões de conjuntos de dados, em vez de depender apenas de regras.</p>
+          <p>Modelos passam a extrair padrões dos dados em vez de depender apenas de regras escritas à mão.</p>
         </div>
         <div>
           <b>2010–2020</b>
           <strong>Deep Learning</strong>
-          <p>Redes profundas, GPUs e grandes datasets impulsionam visão, fala e linguagem.</p>
+          <p>Redes profundas, grandes datasets e GPUs impulsionam visão, fala, tradução e reconhecimento.</p>
         </div>
         <div>
           <b>2020+</b>
           <strong>Modelos fundacionais</strong>
-          <p>Transformers, LLMs e modelos multimodais possibilitam geração e generalização em larga escala.</p>
+          <p>Transformers e modelos multimodais passam a executar muitas tarefas a partir de uma base comum.</p>
         </div>
       </div>
 
+      <div className="theory-stack">
+        <article>
+          <span>POR QUE A IA TEVE “INVERNOS”?</span>
+          <h3>Promessas cresceram mais rápido que a capacidade técnica.</h3>
+          <p>
+            Em vários momentos, expectativas sobre máquinas “inteligentes” ficaram muito acima do que
+            hardware, algoritmos e dados disponíveis podiam entregar. Quando resultados não acompanharam
+            as promessas, financiamento e interesse diminuíram.
+          </p>
+        </article>
+        <article>
+          <span>O QUE MUDOU NO DEEP LEARNING?</span>
+          <h3>Escala passou a importar muito.</h3>
+          <p>
+            Redes neurais não eram novas, mas o aumento de dados digitais, GPUs e técnicas de treinamento
+            tornou possível treinar redes muito maiores e mais profundas com resultados práticos relevantes.
+          </p>
+        </article>
+        <article>
+          <span>TRANSFORMERS</span>
+          <h3>A linguagem ganhou uma arquitetura altamente escalável.</h3>
+          <p>
+            A arquitetura Transformer, introduzida em 2017, tornou eficiente modelar relações em sequências
+            longas. Ela se tornou a base de muitos LLMs e também foi adaptada para imagem, áudio e multimodalidade.
+          </p>
+        </article>
+      </div>
+
+      <div className="worked-example">
+        <span className="section-label">LEITURA HISTÓRICA</span>
+        <h3>Um chatbot de 1980 e um LLM moderno podem parecer semelhantes na interface.</h3>
+        <p>
+          O primeiro poderia selecionar respostas com regras e padrões explícitos. O segundo produz texto
+          estimando probabilidades condicionais de tokens com bilhões de parâmetros aprendidos. A interface
+          “conversa” não revela a arquitetura por trás dela.
+        </p>
+      </div>
+
       <blockquote>
-        Cada geração não apagou completamente a anterior. Sistemas modernos frequentemente
-        combinam regras, modelos estatísticos, redes neurais e software tradicional.
+        Cada geração não apagou completamente a anterior. Sistemas modernos frequentemente combinam
+        regras, modelos estatísticos, redes neurais e software tradicional.
       </blockquote>
     </div>
   )
@@ -312,19 +398,23 @@ function HistorySlide() {
 function MapSlide() {
   return (
     <div className="lesson-slide">
-      <span className="slide-kicker">1.2 · MAPA DA ÁREA</span>
+      <span className="slide-kicker">1.2 · MAPA DA ÁREA · 20 MIN</span>
       <h2>IA é o campo; Machine Learning e Deep Learning são abordagens dentro dele.</h2>
+      <p className="slide-lead">
+        Entender a hierarquia evita um erro comum: tratar IA, Machine Learning, Deep Learning
+        e IA Generativa como sinônimos.
+      </p>
 
       <div className="nested-map">
         <div className="map-level ia">
           <b>INTELIGÊNCIA ARTIFICIAL</b>
-          <span>Sistemas capazes de realizar tarefas associadas a percepção, decisão, linguagem e resolução de problemas.</span>
+          <span>Campo amplo dedicado a sistemas que executam tarefas associadas a percepção, decisão, linguagem, planejamento e resolução de problemas.</span>
           <div className="map-level ml">
             <b>MACHINE LEARNING</b>
-            <span>Algoritmos que aprendem padrões a partir de exemplos e dados.</span>
+            <span>Abordagens nas quais algoritmos ajustam modelos a partir de dados e exemplos.</span>
             <div className="map-level dl">
               <b>DEEP LEARNING</b>
-              <span>Machine Learning baseado em redes neurais profundas.</span>
+              <span>Machine Learning baseado em redes neurais com múltiplas camadas e representações aprendidas.</span>
               <div className="map-level gen">
                 <b>IA GENERATIVA</b>
                 <span>Modelos capazes de produzir novo texto, imagem, áudio, código e outros conteúdos.</span>
@@ -340,6 +430,41 @@ function MapSlide() {
         <div><span>DL</span><b>Reconhecimento de objetos</b></div>
         <div><span>GenAI</span><b>LLM escrevendo uma resposta</b></div>
       </div>
+
+      <div className="theory-stack">
+        <article>
+          <span>NEM TODA IA É ML</span>
+          <h3>Regras e algoritmos de busca também podem compor sistemas inteligentes.</h3>
+          <p>
+            Um mecanismo de planejamento que busca a melhor sequência de ações pode ser considerado IA
+            mesmo sem aprender pesos a partir de um dataset.
+          </p>
+        </article>
+        <article>
+          <span>NEM TODO ML É DEEP LEARNING</span>
+          <h3>Modelos clássicos continuam extremamente úteis.</h3>
+          <p>
+            Regressão, árvores, Random Forest e Gradient Boosting podem superar redes neurais em muitos
+            problemas com dados tabulares, menor volume de dados e necessidade de interpretabilidade.
+          </p>
+        </article>
+        <article>
+          <span>IA GENERATIVA É UMA PARTE DO ECOSSISTEMA</span>
+          <h3>Gerar texto é apenas uma das formas de usar IA.</h3>
+          <p>
+            Classificação, previsão de demanda, detecção de fraude, visão computacional, recomendação,
+            otimização e controle continuam sendo problemas centrais da área.
+          </p>
+        </article>
+      </div>
+
+      <details className="study-check">
+        <summary>Exercício mental</summary>
+        <p>
+          Classifique estes casos: previsão de preço de imóvel, detector de rosto, chatbot com LLM,
+          algoritmo de rota e sistema de recomendação. Eles pertencem a qual nível do mapa acima?
+        </p>
+      </details>
     </div>
   )
 }
@@ -347,37 +472,74 @@ function MapSlide() {
 function LearningSlide() {
   return (
     <div className="lesson-slide">
-      <span className="slide-kicker">1.3 · APRENDIZADO</span>
+      <span className="slide-kicker">1.3 · APRENDIZADO · 20 MIN</span>
       <h2>“Aprender” significa ajustar um modelo a partir de evidências.</h2>
       <p className="slide-lead">
         Um computador não aprende como uma pessoa. Em Machine Learning, aprender significa
-        ajustar parâmetros para reduzir erros ou aumentar uma medida de desempenho.
+        encontrar parâmetros que façam o modelo desempenhar bem uma tarefa segundo uma métrica.
       </p>
 
       <div className="learning-types">
         <article>
           <span>01</span>
           <h3>Supervisionado</h3>
-          <p>Temos exemplos e respostas conhecidas. Ex.: e-mails marcados como spam ou não spam.</p>
+          <p>Temos entradas acompanhadas da resposta desejada. O modelo aprende uma relação entre ambos.</p>
           <strong>Classificação · Regressão</strong>
         </article>
         <article>
           <span>02</span>
           <h3>Não supervisionado</h3>
-          <p>O algoritmo procura estrutura nos dados sem uma resposta previamente fornecida.</p>
+          <p>O algoritmo procura estrutura, grupos ou representações sem uma resposta-alvo fornecida.</p>
           <strong>Clustering · Redução de dimensionalidade</strong>
         </article>
         <article>
           <span>03</span>
           <h3>Por reforço</h3>
-          <p>Um agente executa ações e recebe recompensas ou penalidades ao interagir com um ambiente.</p>
+          <p>Um agente executa ações em um ambiente e aprende a maximizar recompensas acumuladas.</p>
           <strong>Políticas · Recompensas</strong>
+        </article>
+      </div>
+
+      <div className="theory-stack">
+        <article>
+          <span>SUPERVISIONADO</span>
+          <h3>Exemplo: detectar fraude em transações.</h3>
+          <p>
+            Cada exemplo pode conter valor, horário, localização e características da compra, acompanhado
+            de um rótulo “fraude” ou “legítima”. O modelo tenta aprender uma fronteira que generalize
+            para transações novas.
+          </p>
+        </article>
+        <article>
+          <span>NÃO SUPERVISIONADO</span>
+          <h3>Exemplo: descobrir segmentos de clientes.</h3>
+          <p>
+            Sem indicar previamente quais grupos existem, um algoritmo pode encontrar clientes com padrões
+            semelhantes de frequência, ticket médio, produtos e canais de compra.
+          </p>
+        </article>
+        <article>
+          <span>REFORÇO</span>
+          <h3>Exemplo: aprender uma política de controle.</h3>
+          <p>
+            Em vez de receber a “resposta correta” para cada estado, o agente testa ações e recebe sinais
+            de recompensa. O problema passa a ser aprender quais decisões produzem maior retorno no tempo.
+          </p>
         </article>
       </div>
 
       <div className="formula-card">
         <span>IDEIA CENTRAL</span>
-        <code>dados + objetivo + algoritmo → parâmetros ajustados → modelo</code>
+        <code>dados + objetivo + algoritmo → parâmetros ajustados → modelo → avaliação em dados novos</code>
+      </div>
+
+      <div className="worked-example">
+        <span className="section-label">GENERALIZAÇÃO</span>
+        <h3>Memorizar o treino não basta.</h3>
+        <p>
+          O objetivo é funcionar em exemplos não vistos. Se o modelo apresenta resultado excelente nos dados
+          de treino e ruim em novos dados, pode estar sofrendo overfitting — conceito que estudaremos em profundidade.
+        </p>
       </div>
     </div>
   )
@@ -386,8 +548,12 @@ function LearningSlide() {
 function ModelSlide() {
   return (
     <div className="lesson-slide">
-      <span className="slide-kicker">1.4 · ANATOMIA</span>
+      <span className="slide-kicker">1.4 · ANATOMIA · 15 MIN</span>
       <h2>Dataset, modelo, parâmetros e hiperparâmetros não são a mesma coisa.</h2>
+      <p className="slide-lead">
+        Essas palavras aparecem o tempo todo em IA. Saber distingui-las evita confusões
+        quando começarmos a treinar e executar modelos.
+      </p>
 
       <div className="definition-grid">
         <article>
@@ -404,21 +570,50 @@ function ModelSlide() {
         </article>
         <article>
           <b>Hiperparâmetros</b>
-          <p>Configurações escolhidas antes ou durante o treinamento, como learning rate e batch size.</p>
+          <p>Configurações escolhidas pelo processo de treinamento, como learning rate e batch size.</p>
         </article>
         <article>
           <b>Token</b>
-          <p>Unidade em que o texto é dividido para ser processado por modelos de linguagem.</p>
+          <p>Unidade em que o texto é dividido antes de ser processado por um modelo de linguagem.</p>
         </article>
         <article>
           <b>Contexto</b>
-          <p>Informação disponível ao modelo no momento em que ele produz uma resposta.</p>
+          <p>Informação disponível ao modelo no momento em que ele calcula a próxima saída.</p>
+        </article>
+      </div>
+
+      <div className="worked-example">
+        <span className="section-label">ANALOGIA CONTROLADA</span>
+        <h3>Receita, ingredientes e regulagens</h3>
+        <p>
+          Pense no modelo como uma estrutura de receita, nos dados como exemplos de pratos, nos parâmetros
+          como ajustes internos aprendidos para reproduzir o resultado e nos hiperparâmetros como decisões
+          de como conduzir o processo. A analogia é imperfeita, mas ajuda a separar os papéis.
+        </p>
+      </div>
+
+      <div className="theory-stack">
+        <article>
+          <span>LLMs</span>
+          <h3>Bilhões de parâmetros não significam bilhões de fatos.</h3>
+          <p>
+            Parâmetros armazenam relações numéricas distribuídas. Conhecimento e capacidades emergem do conjunto;
+            não existe, em geral, um único peso correspondente a “Recife”, “Python” ou “fotossíntese”.
+          </p>
+        </article>
+        <article>
+          <span>TOKENS</span>
+          <h3>Modelos de linguagem não enxergam texto exatamente como nós.</h3>
+          <p>
+            O texto é tokenizado em unidades que podem ser palavras, partes de palavras, sinais ou bytes.
+            Isso influencia custo, tamanho de contexto e comportamento do modelo.
+          </p>
         </article>
       </div>
 
       <blockquote>
         Um modelo com bilhões de parâmetros não guarda uma “enciclopédia de frases”.
-        Ele codifica relações estatísticas aprendidas durante o treinamento.
+        Ele codifica relações estatísticas distribuídas aprendidas durante o treinamento.
       </blockquote>
     </div>
   )
@@ -427,11 +622,11 @@ function ModelSlide() {
 function TrainingSlide() {
   return (
     <div className="lesson-slide">
-      <span className="slide-kicker">1.5 · CICLO</span>
-      <h2>Treinar é aprender. Inferir é usar o que foi aprendido.</h2>
+      <span className="slide-kicker">1.5 · CICLO · 15 MIN</span>
+      <h2>Treinar é ajustar. Inferir é usar o que foi ajustado.</h2>
 
       <div className="training-flow">
-        <div><span>1</span><b>Dados</b><small>Exemplos de treinamento</small></div>
+        <div><span>1</span><b>Dados</b><small>Exemplos disponíveis</small></div>
         <i>→</i>
         <div><span>2</span><b>Treinamento</b><small>Ajuste dos parâmetros</small></div>
         <i>→</i>
@@ -444,20 +639,46 @@ function TrainingSlide() {
         <article>
           <span>TREINAMENTO</span>
           <h3>Mais caro e demorado</h3>
-          <p>Processa muitos exemplos, calcula erro, propaga gradientes e atualiza parâmetros repetidamente.</p>
+          <p>
+            Processa muitos exemplos, calcula erro, obtém gradientes e atualiza parâmetros repetidamente.
+            Pode levar minutos, dias ou semanas dependendo da escala.
+          </p>
         </article>
         <article>
           <span>INFERÊNCIA</span>
           <h3>Mais frequente no produto</h3>
-          <p>Recebe uma entrada e executa o modelo já treinado para gerar classificação, previsão ou conteúdo.</p>
+          <p>
+            Recebe uma entrada e executa o modelo já treinado para gerar classificação, previsão, embedding,
+            texto, imagem ou outra saída.
+          </p>
+        </article>
+      </div>
+
+      <div className="theory-stack">
+        <article>
+          <span>FINE-TUNING</span>
+          <h3>É um novo treinamento, mas normalmente menor.</h3>
+          <p>
+            Em vez de treinar tudo do zero, partimos de um modelo pré-treinado e continuamos o ajuste com
+            dados específicos. Mais adiante veremos LoRA, QLoRA e quando isso faz sentido.
+          </p>
+        </article>
+        <article>
+          <span>RAG</span>
+          <h3>Não é treinamento do modelo.</h3>
+          <p>
+            RAG recupera informação externa e a inclui no contexto da inferência. O conhecimento usado na
+            resposta pode mudar sem modificar os parâmetros do LLM.
+          </p>
         </article>
       </div>
 
       <div className="teaching-note">
         <strong>Exemplo com LLM local</strong>
         <p>
-          Quando executamos um modelo no Ollama, normalmente estamos fazendo inferência.
-          O treinamento original daquele modelo ocorreu antes, em infraestrutura muito maior.
+          Quando executamos um modelo no Ollama, normalmente estamos fazendo inferência. O treinamento
+          original ocorreu antes, em infraestrutura muito maior. Quando adicionamos documentos via RAG,
+          continuamos fazendo inferência, agora com contexto recuperado.
         </p>
       </div>
     </div>
@@ -467,46 +688,77 @@ function TrainingSlide() {
 function HardwareSlide() {
   return (
     <div className="lesson-slide">
-      <span className="slide-kicker">1.6 · HARDWARE</span>
+      <span className="slide-kicker">1.6 · HARDWARE · 15 MIN</span>
       <h2>IA é software, mas o limite prático frequentemente aparece no hardware.</h2>
+      <p className="slide-lead">
+        Entender recursos computacionais evita escolher modelos que não cabem na memória,
+        subdimensionar servidores ou confundir lentidão de rede com lentidão do modelo.
+      </p>
 
       <div className="hardware-grid">
         <article>
           <div className="hardware-icon">CPU</div>
           <h3>Processador</h3>
-          <p>Excelente para tarefas gerais, controle do sistema e partes sequenciais da aplicação.</p>
+          <p>Excelente para controle, lógica geral, pré/pós-processamento e partes sequenciais da aplicação.</p>
         </article>
         <article>
           <div className="hardware-icon">GPU</div>
           <h3>Processamento paralelo</h3>
-          <p>Milhares de operações simultâneas tornam matrizes e tensores muito mais rápidos.</p>
+          <p>Muitas unidades executam operações sobre matrizes e tensores em paralelo, acelerando treinamento e inferência.</p>
         </article>
         <article>
           <div className="hardware-icon">RAM</div>
           <h3>Memória do sistema</h3>
-          <p>Mantém dados e processos ativos. Pode também receber partes do modelo por offload.</p>
+          <p>Mantém processos, dados e partes de modelos ativas; também pode receber camadas por offload.</p>
         </article>
         <article>
           <div className="hardware-icon">VRAM</div>
           <h3>Memória da GPU</h3>
-          <p>É um dos limites centrais para carregar e executar modelos diretamente na GPU.</p>
+          <p>Um dos limites mais importantes para carregar pesos, cache de atenção e batches diretamente na GPU.</p>
         </article>
         <article>
           <div className="hardware-icon">SSD</div>
           <h3>Armazenamento</h3>
-          <p>Guarda modelos, datasets, índices vetoriais, logs e artefatos do projeto.</p>
+          <p>Guarda modelos, datasets, índices vetoriais, logs, checkpoints e artefatos de experimentos.</p>
         </article>
         <article>
           <div className="hardware-icon">NET</div>
           <h3>Rede</h3>
-          <p>Importante quando modelos, APIs, bancos e clientes estão distribuídos entre máquinas.</p>
+          <p>Afeta sistemas distribuídos, APIs remotas, acesso a bancos, ingestão de dados e clusters de treinamento.</p>
+        </article>
+      </div>
+
+      <div className="theory-stack">
+        <article>
+          <span>VRAM E QUANTIZAÇÃO</span>
+          <h3>Reduzir precisão pode permitir executar modelos maiores.</h3>
+          <p>
+            Pesos em menor precisão ocupam menos memória. Quantização troca parte da precisão numérica por
+            economia de VRAM/RAM e, muitas vezes, maior velocidade. O impacto depende do modelo e da tarefa.
+          </p>
+        </article>
+        <article>
+          <span>LATÊNCIA × THROUGHPUT</span>
+          <h3>Responder rápido a um usuário e atender muitos usuários são problemas diferentes.</h3>
+          <p>
+            Latência mede quanto uma resposta individual demora; throughput mede quanto trabalho o sistema
+            processa por unidade de tempo. Batching pode aumentar throughput e ao mesmo tempo alterar latência.
+          </p>
         </article>
       </div>
 
       <div className="formula-card">
         <span>REGRA PRÁTICA</span>
-        <code>modelo maior → mais memória · mais usuários → mais throughput · mais contexto → mais processamento</code>
+        <code>modelo maior → mais memória · mais usuários → mais throughput · mais contexto → mais memória e processamento</code>
       </div>
+
+      <details className="study-check">
+        <summary>Antes do laboratório</summary>
+        <p>
+          Se um modelo não cabe totalmente na VRAM, quais opções você imagina? Nas próximas aulas veremos
+          quantização, offload para RAM/CPU, redução de contexto, modelos menores e servidores especializados.
+        </p>
+      </details>
     </div>
   )
 }
