@@ -1329,3 +1329,224 @@ blockquote {
     width: 100%;
   }
 }
+
+
+/* ===== Programação pública do curso ===== */
+
+.program-btn {
+  border: 1px solid #2b617c;
+  border-radius: 11px;
+  padding: 13px 16px;
+  background: #071722;
+  color: #69e0f7;
+  font-weight: 850;
+}
+
+.program-btn:hover {
+  background: #0a1e2b;
+  color: #eefbff;
+}
+
+.public-program {
+  scroll-margin-top: 24px;
+  margin: 35px 0;
+  padding: 30px;
+  border: 1px solid #1a4059;
+  border-radius: 19px;
+  background: #07111c;
+}
+
+.program-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  align-items: flex-start;
+  margin-bottom: 22px;
+}
+
+.program-header h2 {
+  margin: 7px 0 8px;
+  font-size: 30px;
+}
+
+.program-header p {
+  margin: 0;
+  color: #849cb1;
+  line-height: 1.6;
+  font-size: 12px;
+}
+
+.program-close {
+  border: 1px solid #2a4a62;
+  border-radius: 10px;
+  padding: 9px 13px;
+  background: #0a1622;
+  color: #8fa8bc;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.program-list {
+  display: grid;
+  gap: 9px;
+}
+
+.program-discipline {
+  overflow: hidden;
+  border: 1px solid #17344b;
+  border-radius: 14px;
+  background: #08131f;
+}
+
+.program-discipline summary {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 18px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.program-discipline summary::-webkit-details-marker {
+  display: none;
+}
+
+.program-discipline[open] summary {
+  border-bottom: 1px solid #17344b;
+  background: #091927;
+}
+
+.program-number {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #22516b;
+  border-radius: 10px;
+  color: #5bdcf5;
+  background: #071925;
+  font-size: 11px;
+  font-weight: 950;
+}
+
+.program-summary-copy {
+  min-width: 0;
+}
+
+.program-summary-copy strong,
+.program-summary-copy span {
+  display: block;
+}
+
+.program-summary-copy strong {
+  color: #dcecf7;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.program-summary-copy span {
+  margin-top: 4px;
+  color: #678198;
+  font-size: 10px;
+}
+
+.program-chevron {
+  color: #5fdcf4;
+  font-size: 20px;
+  transition: transform .2s ease;
+}
+
+.program-discipline[open] .program-chevron {
+  transform: rotate(180deg);
+}
+
+.program-lessons {
+  display: grid;
+}
+
+.program-lesson {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 18px;
+  border-top: 1px solid #10283a;
+}
+
+.program-lesson:first-child {
+  border-top: 0;
+}
+
+.program-lesson-number {
+  color: #48d6f2;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.program-lesson strong {
+  color: #aebfd0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.program-lesson-hours {
+  padding: 5px 8px;
+  border: 1px solid #1f4258;
+  border-radius: 999px;
+  color: #7cdff2;
+  background: #071823;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+@media (max-width: 680px) {
+  .program-btn {
+    width: 100%;
+  }
+
+  .public-program {
+    padding: 18px;
+  }
+
+  .program-header {
+    flex-direction: column;
+  }
+
+  .program-header h2 {
+    font-size: 24px;
+  }
+
+  .program-close {
+    width: 100%;
+  }
+
+  .program-discipline summary {
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    padding: 14px;
+  }
+
+  .program-number {
+    width: 34px;
+    height: 34px;
+  }
+
+  .program-summary-copy strong {
+    font-size: 12px;
+  }
+
+  .program-lesson {
+    grid-template-columns: 1fr auto;
+    gap: 7px 10px;
+    padding: 13px 14px;
+  }
+
+  .program-lesson-number {
+    grid-column: 1 / -1;
+  }
+
+  .program-lesson strong {
+    font-size: 11px;
+  }
+}
