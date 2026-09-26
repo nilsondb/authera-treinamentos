@@ -2420,3 +2420,28 @@ blockquote {
     justify-self: stretch;
   }
 }
+
+
+.progress-criteria {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border-left: 1px solid #17364d;
+  border-right: 1px solid #17364d;
+  background: #17364d;
+}
+
+.progress-criteria span {
+  padding: 9px 10px;
+  background: #07131e;
+  color: #6f899e;
+  text-align: center;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+@media (max-width: 680px) {
+  .progress-criteria {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
