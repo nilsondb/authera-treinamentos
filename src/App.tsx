@@ -6,6 +6,7 @@ const STORAGE = {
   student: 'authera.student.v1',
   completed: 'authera.completed.v1',
   answers: 'authera.answers.v1',
+  session: 'authera.session.v1',
 }
 
 function loadJSON<T>(key: string, fallback: T): T {
@@ -32,9 +33,14 @@ const projectMilestones: Record<number, string> = {
   12: 'Consolidar, documentar, demonstrar e defender o produto final.',
 }
 
+type Screen = 'home' | 'register' | 'course'
+
 function App() {
   const [student, setStudent] = useState<Student | null>(() =>
     loadJSON<Student | null>(STORAGE.student, null),
+  )
+  const [screen, setScreen] = useState<Screen>(() =>
+    localStorage.getItem(STORAGE.session) === 'course' ? 'course' : 'home',
   )
   const [selectedLessonId, setSelectedLessonId] = useState(1)
   const [completed, setCompleted] = useState<number[]>(() =>
@@ -76,7 +82,26 @@ function App() {
     }
 
     localStorage.setItem(STORAGE.student, JSON.stringify(newStudent))
+    localStorage.setItem(STORAGE.session, 'course')
     setStudent(newStudent)
+    setScreen('course')
+  }
+
+  function enterCourse() {
+    if (!student) {
+      setScreen('register')
+      return
+    }
+
+    localStorage.setItem(STORAGE.session, 'course')
+    setScreen('course')
+    window.scrollTo({ top: 0 })
+  }
+
+  function goHome() {
+    localStorage.removeItem(STORAGE.session)
+    setScreen('home')
+    window.scrollTo({ top: 0 })
   }
 
   function toggleComplete() {
@@ -113,12 +138,30 @@ function App() {
     setCompleted([])
     setAnswers({})
     setSelectedLessonId(1)
+    setScreen('home')
   }
 
-  if (!student) {
+  if (screen === 'home') {
+    return (
+      <HomePage
+        student={student}
+        progress={progress}
+        completedLessons={completed.length}
+        onContinue={enterCourse}
+        onRegister={() => setScreen('register')}
+        onReset={resetPilot}
+      />
+    )
+  }
+
+  if (!student || screen === 'register') {
     return (
       <main className="auth-page">
         <section className="auth-shell">
+          <button className="back-home-btn" type="button" onClick={goHome}>
+            ← Página principal
+          </button>
+
           <div className="brand-lockup">
             <div className="brand-mark">A</div>
             <div>
@@ -252,9 +295,14 @@ function App() {
           })}
         </nav>
 
-        <button className="ghost-btn reset-btn" onClick={resetPilot}>
-          Encerrar acesso piloto
-        </button>
+        <div className="sidebar-actions">
+          <button className="ghost-btn" onClick={goHome}>
+            ← Página principal
+          </button>
+          <button className="logout-btn" onClick={goHome}>
+            Encerrar sessão
+          </button>
+        </div>
       </aside>
 
       <main className="main-area">
@@ -375,6 +423,125 @@ function App() {
         </article>
       </main>
     </div>
+  )
+}
+
+type HomePageProps = {
+  student: Student | null
+  progress: number
+  completedLessons: number
+  onContinue: () => void
+  onRegister: () => void
+  onReset: () => void
+}
+
+function HomePage({
+  student,
+  progress,
+  completedLessons,
+  onContinue,
+  onRegister,
+  onReset,
+}: HomePageProps) {
+  return (
+    <main className="home-page">
+      <header className="home-header">
+        <div className="brand-lockup">
+          <div className="brand-mark">A</div>
+          <div>
+            <strong>AUTHERA</strong>
+            <span>TREINAMENTOS</span>
+          </div>
+        </div>
+
+        <span className="pilot-status">PLATAFORMA PILOTO</span>
+      </header>
+
+      <section className="home-hero">
+        <div className="home-copy">
+          <span className="eyebrow">FORMAÇÃO PROFISSIONAL EM INTELIGÊNCIA ARTIFICIAL</span>
+          <h1>Aprenda IA construindo sistemas inteligentes de verdade.</h1>
+          <p>
+            Uma formação que percorre fundamentos, Machine Learning, Deep Learning,
+            LLMs, RAG, agentes, infraestrutura, MLOps, segurança e um Projeto
+            Integrador desenvolvido durante todo o curso.
+          </p>
+
+          <div className="home-actions">
+            {student ? (
+              <button className="primary-btn" onClick={onContinue}>
+                Continuar curso
+              </button>
+            ) : (
+              <button className="primary-btn" onClick={onRegister}>
+                Começar turma piloto
+              </button>
+            )}
+            <a className="secondary-link" href="#curso">
+              Conhecer o curso
+            </a>
+          </div>
+        </div>
+
+        <div className="home-course-card" id="curso">
+          <span>CURSO 01</span>
+          <h2>{course.title}</h2>
+          <div className="home-stats">
+            <div><b>360h</b><span>Carga horária</span></div>
+            <div><b>12</b><span>Disciplinas</span></div>
+            <div><b>60</b><span>Aulas</span></div>
+          </div>
+        </div>
+      </section>
+
+      {student && (
+        <section className="returning-card">
+          <div className="returning-avatar">{student.name.charAt(0).toUpperCase()}</div>
+          <div className="returning-copy">
+            <span>Bem-vindo de volta</span>
+            <h2>{student.name}</h2>
+            <p>{completedLessons} de 60 aulas concluídas</p>
+          </div>
+          <div className="returning-progress">
+            <strong>{progress}%</strong>
+            <div className="progress-track">
+              <div className="progress-fill" style={{ width: `${progress}%` }} />
+            </div>
+          </div>
+          <button className="primary-btn" onClick={onContinue}>
+            Continuar de onde parei
+          </button>
+        </section>
+      )}
+
+      <section className="home-pillars">
+        <article>
+          <span>01</span>
+          <h3>Fundamentos sólidos</h3>
+          <p>Matemática, dados, Machine Learning e Deep Learning antes das ferramentas.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>IA moderna</h3>
+          <p>LLMs, RAG, agentes, modelos locais, multimodalidade e MCP.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Produção real</h3>
+          <p>APIs, Docker, GPU, MLOps, observabilidade, segurança e implantação.</p>
+        </article>
+      </section>
+
+      {student && (
+        <div className="pilot-maintenance">
+          <button onClick={onReset}>Apagar dados locais da turma piloto</button>
+        </div>
+      )}
+
+      <footer className="home-footer">
+        AUTHERA Treinamentos · Turma piloto
+      </footer>
+    </main>
   )
 }
 
