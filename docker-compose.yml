@@ -1,0 +1,12 @@
+services:
+  authera-treinamentos:
+    build: .
+    container_name: authera-treinamentos
+    restart: unless-stopped
+    ports:
+      - "3062:80"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://127.0.0.1/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
