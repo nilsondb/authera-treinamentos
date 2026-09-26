@@ -503,6 +503,19 @@ type HomePageProps = {
 }
 
 function HomePage({ onLogin, onRegister }: HomePageProps) {
+  const [showProgram, setShowProgram] = useState(false)
+
+  function toggleProgram() {
+    const next = !showProgram
+    setShowProgram(next)
+
+    if (!showProgram) {
+      window.setTimeout(() => {
+        document.getElementById('programacao')?.scrollIntoView({ behavior: 'smooth' })
+      }, 80)
+    }
+  }
+
   return (
     <main className="home-page">
       <header className="home-header">
@@ -536,6 +549,9 @@ function HomePage({ onLogin, onRegister }: HomePageProps) {
             </button>
             <button className="secondary-btn" onClick={onLogin}>
               Entrar na área do aluno
+            </button>
+            <button className="program-btn" onClick={toggleProgram}>
+              {showProgram ? 'Fechar programação' : 'Ver programação completa'}
             </button>
           </div>
         </div>
@@ -573,6 +589,50 @@ function HomePage({ onLogin, onRegister }: HomePageProps) {
           <p>APIs, Docker, GPU, MLOps, observabilidade, segurança e implantação.</p>
         </article>
       </section>
+
+      {showProgram && (
+        <section className="public-program" id="programacao">
+          <div className="program-header">
+            <div>
+              <span className="section-label">PROGRAMAÇÃO COMPLETA</span>
+              <h2>12 disciplinas · 60 aulas · 360 horas</h2>
+              <p>
+                Clique em uma disciplina para visualizar as cinco aulas que fazem parte dela.
+              </p>
+            </div>
+            <button className="program-close" onClick={toggleProgram}>Fechar</button>
+          </div>
+
+          <div className="program-list">
+            {course.disciplines.map((discipline) => (
+              <details className="program-discipline" key={discipline.id}>
+                <summary>
+                  <div className="program-number">
+                    {String(discipline.id).padStart(2, '0')}
+                  </div>
+                  <div className="program-summary-copy">
+                    <strong>{discipline.title}</strong>
+                    <span>30 horas · 5 aulas</span>
+                  </div>
+                  <div className="program-chevron">⌄</div>
+                </summary>
+
+                <div className="program-lessons">
+                  {discipline.lessons.map((lesson) => (
+                    <div className="program-lesson" key={lesson.id}>
+                      <span className="program-lesson-number">
+                        Aula {String(lesson.id).padStart(2, '0')}
+                      </span>
+                      <strong>{lesson.title}</strong>
+                      <span className="program-lesson-hours">{lesson.hours}h</span>
+                    </div>
+                  ))}
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="public-cta">
         <div>
