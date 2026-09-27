@@ -284,6 +284,15 @@ function OpeningSlide() {
             conceitos permanecem úteis por muito mais tempo.
           </p>
         </article>
+        <article>
+          <span>IDEIA 4</span>
+          <h3>IA depende de computação: CPU, GPU, memória e armazenamento fazem parte do problema.</h3>
+          <p>
+            Um modelo pode ser excelente e ainda assim ser inviável em determinado ambiente. Tamanho do
+            modelo, quantidade de parâmetros, precisão numérica, contexto, VRAM, RAM e velocidade de disco
+            influenciam diretamente onde e como uma solução de IA pode rodar.
+          </p>
+        </article>
       </div>
 
       <div className="worked-example">
