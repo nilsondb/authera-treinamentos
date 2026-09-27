@@ -2702,3 +2702,204 @@ blockquote {
     font-size: 19px;
   }
 }
+
+
+/* ===== Referências e pesquisa externa ===== */
+
+.research-section {
+  margin-top: 28px;
+  padding: 28px;
+  border: 1px solid #1b4058;
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg, rgba(8, 27, 40, .92), rgba(6, 14, 23, .98));
+}
+
+.research-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  align-items: flex-start;
+}
+
+.research-heading h2 {
+  margin: 7px 0 9px;
+  font-size: 29px;
+}
+
+.research-heading p {
+  max-width: 780px;
+  margin: 0;
+  color: #8ca5b9;
+  line-height: 1.7;
+  font-size: 13px;
+}
+
+.research-badge {
+  flex: 0 0 auto;
+  padding: 8px 11px;
+  border: 1px solid #28546c;
+  border-radius: 999px;
+  color: #67def5;
+  background: #071925;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.research-guidance {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.research-guidance article {
+  padding: 19px;
+  border: 1px solid #1a374d;
+  border-radius: 14px;
+  background: #07121c;
+}
+
+.research-guidance article > span {
+  color: #48d7f2;
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: .1em;
+}
+
+.research-guidance h3 {
+  margin: 7px 0 8px;
+  color: #deedf7;
+  font-size: 15px;
+}
+
+.research-guidance p {
+  margin: 0;
+  color: #849daf;
+  line-height: 1.65;
+  font-size: 11px;
+}
+
+.reference-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+  margin-top: 24px;
+}
+
+.reference-card {
+  display: block;
+  padding: 19px;
+  border: 1px solid #19374d;
+  border-radius: 14px;
+  background: #07111b;
+  color: inherit;
+  text-decoration: none;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.reference-card:hover {
+  transform: translateY(-2px);
+  border-color: #2c6c89;
+  background: #091a27;
+}
+
+.reference-card > span {
+  color: #49d9f4;
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: .1em;
+}
+
+.reference-card h3 {
+  margin: 7px 0 5px;
+  color: #e2eef7;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.reference-card b {
+  color: #9db3c5;
+  font-size: 10px;
+}
+
+.reference-card p {
+  margin: 9px 0 12px;
+  color: #8099ad;
+  line-height: 1.6;
+  font-size: 10px;
+}
+
+.reference-card small {
+  color: #64def4;
+  font-size: 9px;
+  font-weight: 850;
+}
+
+.research-rule {
+  margin-top: 20px;
+  padding: 18px 20px;
+  border-left: 3px solid #22d3ee;
+  background: #081a27;
+}
+
+.research-rule strong {
+  color: #dcecf6;
+  font-size: 13px;
+}
+
+.research-rule p {
+  margin: 6px 0 0;
+  color: #8ba2b5;
+  line-height: 1.65;
+  font-size: 11px;
+}
+
+@media (min-width: 1200px) {
+  .research-heading h2 {
+    font-size: 34px;
+  }
+
+  .research-heading p,
+  .research-guidance p,
+  .research-rule p {
+    font-size: 14px;
+  }
+
+  .research-guidance h3,
+  .reference-card h3 {
+    font-size: 18px;
+  }
+
+  .reference-card b,
+  .reference-card p {
+    font-size: 13px;
+  }
+
+  .reference-card small,
+  .reference-card > span,
+  .research-guidance article > span {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 800px) {
+  .research-guidance,
+  .reference-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .research-section {
+    padding: 20px;
+  }
+
+  .research-heading {
+    flex-direction: column;
+  }
+
+  .research-heading h2 {
+    font-size: 24px;
+  }
+}
