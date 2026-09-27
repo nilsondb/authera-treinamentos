@@ -234,6 +234,131 @@ export default function LessonOne({
           </button>
         </div>
       </div>
+      <ResearchReferences />
+    </section>
+  )
+}
+
+function ResearchReferences() {
+  const references = [
+    {
+      kind: 'Livro-base',
+      title: 'Artificial Intelligence: A Modern Approach — 4ª edição',
+      authors: 'Stuart Russell e Peter Norvig',
+      note: 'Referência ampla para fundamentos, agentes, busca, raciocínio, aprendizado e áreas clássicas da IA.',
+      href: 'https://www.pearson.com/en-us/subject-catalog/p/artificial-intelligence-a-modern-approach/P200000003500',
+    },
+    {
+      kind: 'Artigo histórico',
+      title: 'Computing Machinery and Intelligence',
+      authors: 'Alan M. Turing — Mind, 1950',
+      note: 'Texto clássico que apresenta o “jogo da imitação” e discute a pergunta sobre máquinas e inteligência.',
+      href: 'https://academic.oup.com/mind/article/LIX/236/433/986238',
+    },
+    {
+      kind: 'Livro aberto',
+      title: 'Deep Learning',
+      authors: 'Ian Goodfellow, Yoshua Bengio e Aaron Courville',
+      note: 'Livro técnico de referência. A versão oficial online pode ser consultada gratuitamente.',
+      href: 'https://www.deeplearningbook.org/',
+    },
+    {
+      kind: 'Relatório atual',
+      title: 'AI Index Report 2026',
+      authors: 'Stanford Institute for Human-Centered AI',
+      note: 'Panorama anual baseado em dados sobre evolução técnica, adoção, economia, ciência e impactos da IA.',
+      href: 'https://hai.stanford.edu/ai-index/2026-ai-index-report',
+    },
+    {
+      kind: 'Curso complementar',
+      title: 'Machine Learning Crash Course',
+      authors: 'Google for Developers',
+      note: 'Material interativo para revisar e ampliar fundamentos de Machine Learning com exercícios e visualizações.',
+      href: 'https://developers.google.com/machine-learning/crash-course?hl=pt-br',
+    },
+    {
+      kind: 'Documentação técnica',
+      title: 'CUDA Programming Guide',
+      authors: 'NVIDIA',
+      note: 'Referência oficial para compreender o modelo de programação paralela em GPU e a plataforma CUDA.',
+      href: 'https://docs.nvidia.com/cuda/cuda-programming-guide/',
+    },
+    {
+      kind: 'Artigo avançado',
+      title: 'Attention Is All You Need',
+      authors: 'Vaswani et al. — 2017',
+      note: 'Artigo que introduziu a arquitetura Transformer. Não é leitura obrigatória nesta aula; guarde-o para acompanhar a evolução do curso.',
+      href: 'https://arxiv.org/abs/1706.03762',
+    },
+  ]
+
+  return (
+    <section className="research-section">
+      <div className="research-heading">
+        <div>
+          <span className="section-label">BIBLIOGRAFIA E PESQUISA EXTERNA</span>
+          <h2>A aula termina aqui. O aprendizado, não.</h2>
+          <p>
+            Use estas fontes para comparar explicações, aprofundar conceitos e desenvolver
+            autonomia de pesquisa. Não é necessário ler tudo de uma vez.
+          </p>
+        </div>
+        <div className="research-badge">AULA 01</div>
+      </div>
+
+      <div className="research-guidance">
+        <article>
+          <span>PESQUISA 01</span>
+          <h3>Compare duas definições de Inteligência Artificial.</h3>
+          <p>
+            Leia a introdução de Russell & Norvig e o início do texto de Turing. Anote o que
+            cada fonte entende por comportamento inteligente e onde as abordagens diferem.
+          </p>
+        </article>
+        <article>
+          <span>PESQUISA 02</span>
+          <h3>Encontre um caso real que não seja IA generativa.</h3>
+          <p>
+            Procure uma aplicação de classificação, previsão, recomendação, visão computacional
+            ou otimização. Identifique quais dados entram e qual saída o sistema produz.
+          </p>
+        </article>
+        <article>
+          <span>PESQUISA 03</span>
+          <h3>Relacione software e hardware.</h3>
+          <p>
+            Consulte a introdução do CUDA Programming Guide e explique por que operações em
+            paralelo são relevantes para redes neurais e outros workloads de IA.
+          </p>
+        </article>
+      </div>
+
+      <div className="reference-list">
+        {references.map((reference) => (
+          <a
+            className="reference-card"
+            href={reference.href}
+            target="_blank"
+            rel="noreferrer"
+            key={reference.title}
+          >
+            <span>{reference.kind}</span>
+            <h3>{reference.title}</h3>
+            <b>{reference.authors}</b>
+            <p>{reference.note}</p>
+            <small>Abrir fonte ↗</small>
+          </a>
+        ))}
+      </div>
+
+      <div className="research-rule">
+        <strong>Regra AUTHERA de pesquisa</strong>
+        <p>
+          Prefira livros reconhecidos, artigos científicos, documentação oficial e instituições
+          acadêmicas. Blogs e vídeos podem ajudar, mas devem complementar — não substituir —
+          fontes primárias e referências técnicas.
+        </p>
+      </div>
     </section>
   )
 }
