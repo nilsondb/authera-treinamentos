@@ -2553,3 +2553,152 @@ blockquote {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ===== Desktop readability pass ===== */
+@media (min-width: 1200px) {
+  .app-shell {
+    grid-template-columns: 390px minmax(0, 1fr);
+  }
+
+  .lesson-page {
+    width: min(1180px, calc(100% - 64px));
+  }
+
+  .sidebar {
+    font-size: 14px;
+  }
+
+  .discipline-summary b {
+    font-size: 13px;
+  }
+
+  .discipline-summary small,
+  .lesson-menu-item {
+    font-size: 11px;
+  }
+
+  .topbar > div:first-child strong {
+    font-size: 15px;
+  }
+
+  .lesson-player-head {
+    padding: 32px;
+  }
+
+  .lesson-player-head h2 {
+    font-size: 34px;
+  }
+
+  .lesson-player-head p {
+    max-width: 900px;
+    font-size: 15px;
+  }
+
+  .lesson-internal-progress strong {
+    font-size: 38px;
+  }
+
+  .lesson-internal-progress span,
+  .progress-criteria span,
+  .stage-nav-item small,
+  .slide-topline,
+  .slide-actions > span {
+    font-size: 10px;
+  }
+
+  .stage-nav-item {
+    min-height: 90px;
+    padding: 14px;
+  }
+
+  .stage-nav-item > span {
+    font-size: 10px;
+  }
+
+  .stage-nav-item b {
+    font-size: 12px;
+  }
+
+  .lesson-slide {
+    padding: 42px;
+  }
+
+  .slide-kicker,
+  .section-label {
+    font-size: 11px;
+  }
+
+  .lesson-slide > h2 {
+    max-width: 980px;
+    font-size: 44px;
+  }
+
+  .slide-lead {
+    max-width: 980px;
+    font-size: 17px;
+  }
+
+  .objectives-grid p,
+  .theory-stack p,
+  .worked-example p,
+  .teaching-note p,
+  .study-check p,
+  .timeline p,
+  .map-level span,
+  .learning-types p,
+  .definition-grid p,
+  .hardware-grid p,
+  .comparison-grid p,
+  .lab-step p,
+  .lab-observation li,
+  .quiz-option,
+  .lesson-summary-box > p {
+    font-size: 14px;
+  }
+
+  .theory-stack h3,
+  .worked-example h3,
+  .timeline strong,
+  .learning-types h3,
+  .comparison-grid h3,
+  .hardware-grid h3,
+  .lab-step h3,
+  .quiz-title h3 {
+    font-size: 19px;
+  }
+
+  .theory-stack article > span,
+  .lab-objectives article > span,
+  .timeline b,
+  .example-strip span,
+  .learning-types article > span,
+  .comparison-grid article > span,
+  .formula-card span,
+  .program-lesson-number {
+    font-size: 10px;
+  }
+
+  .example-strip b,
+  .learning-types strong,
+  .training-flow small,
+  .lab-result span,
+  .quiz-footer > span,
+  .quiz-score span,
+  .answer-meta,
+  .summary-tags span {
+    font-size: 11px;
+  }
+
+  .map-level b,
+  .definition-grid b,
+  .training-flow b,
+  .formula-card code,
+  .lab-step code {
+    font-size: 14px;
+  }
+
+  .challenge-question {
+    font-size: 19px;
+  }
+}
